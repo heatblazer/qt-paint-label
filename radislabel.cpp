@@ -1,10 +1,14 @@
 #include "radislabel.h"
+#include "radistestpaint.h"
 
 #include <QPainter>
 
 RadisLabel::RadisLabel(RadisPaintInterface *paint, QWidget *parent)
     : QLabel(parent), p_paint(paint)
 {
+    // this is experimental!
+    connect(this, SIGNAL(mousePressed()),
+            this, SLOT(handleMousePressed()));
 
 }
 
@@ -18,6 +22,17 @@ RadisLabel::RadisLabel(const QString &text, QWidget *parent)
 RadisLabel::~RadisLabel()
 {
 
+}
+
+void RadisLabel::setRadisPainter(RadisPaintInterface *paint)
+{
+    // delete the class created without a handler
+    if (p_paint != 0) {
+        delete p_paint;
+        p_paint = paint;
+    } else {
+        p_paint = paint;
+    }
 }
 
 
@@ -42,9 +57,11 @@ void RadisLabel::paintEvent(QPaintEvent *ev)
 }
 
 
-void RadisLabel::handleMousePressed(const QWidget *caller)
+void RadisLabel::handleMousePressed()
 {
-    (void)caller;
+    // this is a test change
+    this->setRadisPainter(new RadisTestPaint2());
+    update();
 }
 
 

@@ -17,26 +17,31 @@ public:
     explicit RadisLabel(const QString& text="", QWidget* parent=0);
     virtual ~RadisLabel(); // we may derive better labesl
 
+    void setRadisPainter(RadisPaintInterface* paint);
+
 signals:
     // for now leave the double click
     //void mouse2xClicked();
     void mouseReleased();
     void mousePressed();
 
-
-
 public slots:
-    virtual void handleMousePressed(const QWidget* caller);
+    virtual void handleMousePressed();
     virtual void handleMouseRelease(const QWidget* caller);
+
 protected:
     // don`t remiplement mouse 2x click
     //void mouseDoubleClickEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
+    // this is the method to override
     void paintEvent(QPaintEvent *ev);
 
 private:
+    // this is the paint interface
+    // easier to derive different paint classes then just pass them to the
+    // painter
     RadisPaintInterface* p_paint;
 
 };
