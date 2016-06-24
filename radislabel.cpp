@@ -81,6 +81,12 @@ void RadisLabel::paintEvent(QPaintEvent *ev)
     update();
 }
 
+// TODO: handle the resize of the label
+void RadisLabel::resizeEvent(QResizeEvent *ev)
+{
+    (void)ev;
+}
+
 
 void RadisLabel::handleMousePressed(const QWidget *caller)
 {

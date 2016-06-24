@@ -38,6 +38,9 @@ protected:
     // this is the method to override
     void paintEvent(QPaintEvent *ev);
 
+    // this will handle the resizes if needed
+    void resizeEvent(QResizeEvent *ev);
+
 private:
     // this is the paint interface
     // easier to derive different paint classes then just pass them to the
