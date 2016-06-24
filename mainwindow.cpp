@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_timer.setInterval(1000);
     connect(&m_timer, SIGNAL(timeout()),
-            this, SLOT(generateRandomPaint()));
+            this, SLOT(showAllPaints()));
     m_timer.start();
 
 }
@@ -28,7 +28,18 @@ MainWindow::~MainWindow()
 
 }
 
+
+
 void MainWindow::generateRandomPaint()
 {
-    m_label->setRadisPainter(tests[qrand()%3]);
+
+    // demonstrates random setting of a  painting class with no deletion!
+    m_label->setRadisPainter(tests[qrand()%3], false);
+}
+
+void MainWindow::showAllPaints()
+{
+    static int ind = 0;
+    m_label->setRadisPainter(tests[ind%3]);
+    ind++;
 }

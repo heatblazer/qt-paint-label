@@ -17,7 +17,7 @@ public:
     explicit RadisLabel(const QString& text="", QWidget* parent=0);
     virtual ~RadisLabel(); // we may derive better labesl
 
-    void setRadisPainter(RadisPaintInterface* paint);
+    void setRadisPainter(RadisPaintInterface* paint, bool deleteme=false);
 
 signals:
     // for now leave the double click
@@ -26,7 +26,7 @@ signals:
     void mousePressed();
 
 public slots:
-    virtual void handleMousePressed();
+    virtual void handleMousePressed(const QWidget* caller);
     virtual void handleMouseRelease(const QWidget* caller);
 
 protected:

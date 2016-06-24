@@ -17,6 +17,7 @@ public:
 
 private slots:
     void generateRandomPaint(void);
+    void showAllPaints(void);
 
 private:
     RadisLabel* m_label;

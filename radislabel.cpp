@@ -22,34 +22,52 @@ RadisLabel::~RadisLabel()
 
 }
 
-void RadisLabel::setRadisPainter(RadisPaintInterface *paint)
+
+/** set a new radis paint interface, and delete or overwrite the old one
+ * @brief RadisLabel::setRadisPainter
+ * @param paint
+ * @param deleteme - if we need to delete the ref to the painting class
+ */
+void RadisLabel::setRadisPainter(RadisPaintInterface *paint, bool deleteme)
 {
-    // delete the class created without a handler
-#if 0
-    if (p_paint != 0) {
-        delete p_paint;
-        p_paint = paint;
+
+    if (deleteme) {
+        if (p_paint != 0) {
+            delete p_paint;
+            p_paint = paint;
+        } else {
+            p_paint = paint;
+        }
     } else {
         p_paint = paint;
     }
-#endif
-    p_paint = paint;
 }
 
 
+/** emit when  mouse press
+ * @brief RadisLabel::mousePressEvent
+ * @param event
+ */
 void RadisLabel::mousePressEvent(QMouseEvent *event)
 {
     (void)event;
     emit mousePressed();
 }
 
-
+/** emit when  mouse releases
+ * @brief RadisLabel::mouseReleaseEvent
+ * @param event
+ */
 void RadisLabel::mouseReleaseEvent(QMouseEvent *event)
 {
     (void)event;
     emit mouseReleased();
 }
 
+/** this will paint with the custom overriden class
+ * @brief RadisLabel::paintEvent
+ * @param ev
+ */
 void RadisLabel::paintEvent(QPaintEvent *ev)
 {
     (void)ev;
@@ -58,9 +76,9 @@ void RadisLabel::paintEvent(QPaintEvent *ev)
 }
 
 
-void RadisLabel::handleMousePressed()
+void RadisLabel::handleMousePressed(const QWidget *caller)
 {
-
+    (void)caller;
 }
 
 
