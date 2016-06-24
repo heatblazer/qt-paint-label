@@ -27,6 +27,12 @@ RadisLabel::~RadisLabel()
  * @brief RadisLabel::setRadisPainter
  * @param paint
  * @param deleteme - if we need to delete the ref to the painting class
+ * ex. when you call it that way:
+ *  setRadisPainger(new ImplementationOfPaintInterface());
+ *  setRadisPainger(new Impl2OfPntIface(), true); // this will delete the previous
+ *  in short, if you plan to use non referenced constructions alwyas use true
+ *  if you have instancies of the painter interfaces and you are using only an
+ *  aggregation use it without a param or default (false)
  */
 void RadisLabel::setRadisPainter(RadisPaintInterface *paint, bool deleteme)
 {
