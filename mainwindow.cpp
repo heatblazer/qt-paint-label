@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     m_label = new RadisLabel(new RadisTestPaint(), this);
     m_label->setText("madafaka");
-    m_label->setMinimumSize(QSize(320,240));
+    m_label->setMinimumSize(QSize(240,200));
 
     tests[0] = new RadisTestPaint();
     tests[1] = new RadisTestPaint1();
