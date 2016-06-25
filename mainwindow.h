@@ -19,6 +19,7 @@ private slots:
     void generateRandomPaint(void);
     void showAllPaints(void);
 
+    void handleSomeClicks(void);
 private:
     RadisLabel* m_label;
     QTimer     m_timer;
