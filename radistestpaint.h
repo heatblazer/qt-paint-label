@@ -30,5 +30,15 @@ public:
     void radisPaint(const RadisLabel &pradis);
 };
 
+
+class RadisTestPaint3 : public RadisPaintInterface
+{
+public:
+    RadisTestPaint3();
+    virtual ~RadisTestPaint3();
+    void radisPaint(const RadisLabel &pradis);
+};
+
+
 #endif // RADISTESTPAINT
 

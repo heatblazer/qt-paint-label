@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     tests[0] = new RadisTestPaint();
     tests[1] = new RadisTestPaint1();
     tests[2] = new RadisTestPaint2();
+    tests[3] = new RadisTestPaint3();
 
     m_timer.setInterval(1000);
     connect(&m_timer, SIGNAL(timeout()),
@@ -40,6 +41,6 @@ void MainWindow::generateRandomPaint()
 void MainWindow::showAllPaints()
 {
     static int ind = 0;
-    m_label->setRadisPainter(tests[ind%3]);
+    m_label->setRadisPainter(tests[ind%4]);
     ind++;
 }

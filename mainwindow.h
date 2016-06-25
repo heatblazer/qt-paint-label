@@ -23,7 +23,7 @@ private:
     RadisLabel* m_label;
     QTimer     m_timer;
     //
-    RadisPaintInterface* tests[3];
+    RadisPaintInterface* tests[4];
 };
 
 #endif // MAINWINDOW_H
