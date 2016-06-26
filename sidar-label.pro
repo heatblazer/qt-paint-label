@@ -11,18 +11,16 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Sidar-label
 TEMPLATE = app
 
-# from the prebuild combination
-SOURCES += globe_64.c
 
 SOURCES += main.cpp\
         mainwindow.cpp \
     sidarlabel.cpp \
-    sidarpaintinterface.cpp \
+    SidarPaintInterface.cpp \
     sidartestpaint.cpp
 
 HEADERS  += mainwindow.h \
     sidarlabel.h \
-    sidarpaintinterface.h \
+    SidarPaintInterface.h \
     sidartestpaint.h
 
 FORMS    += mainwindow.ui
