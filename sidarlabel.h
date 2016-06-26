@@ -1,23 +1,23 @@
-#ifndef RADISLABEL_H
-#define RADISLABEL_H
-#include "radispaintinterface.h"
+#ifndef SidarLABEL_H
+#define SidarLABEL_H
+#include "sidarpaintinterface.h"
 
 #include <QLabel>
 
 
 // derived class to extend the functionality to be a clickable
-class RadisPaintInterface;
+class SidarPaintInterface;
 
-class RadisLabel : public QLabel
+class SidarLabel : public QLabel
 {
     Q_OBJECT
 public:
-    explicit RadisLabel(QWidget* parent=0);
-    explicit RadisLabel(RadisPaintInterface* paint, QWidget* parent=0);
-    explicit RadisLabel(const QString& text="", QWidget* parent=0);
-    virtual ~RadisLabel(); // we may derive better labesl
+    explicit SidarLabel(QWidget* parent=0);
+    explicit SidarLabel(SidarPaintInterface* paint, QWidget* parent=0);
+    explicit SidarLabel(const QString& text="", QWidget* parent=0);
+    virtual ~SidarLabel(); // we may derive better labesl
 
-    void setRadisPainter(RadisPaintInterface* paint, bool deleteme=false);
+    void setSidarPainter(SidarPaintInterface* paint, bool deleteme=false);
 
 signals:
     // for now leave the double click
@@ -46,9 +46,9 @@ private:
     // this is the paint interface
     // easier to derive different paint classes then just pass them to the
     // painter
-    RadisPaintInterface* p_paint;
+    SidarPaintInterface* p_paint;
 
 };
 
 
-#endif // RADISLABEL_H
+#endif // SidarLABEL_H

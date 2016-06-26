@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "radistestpaint.h"
+#include "sidartestpaint.h"
 #include "ui_mainwindow.h"
 
 #include <iostream>
@@ -10,15 +10,15 @@
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent)
 {
-    m_label = new RadisLabel(new RadisTestPaint(), this);
+    m_label = new SidarLabel(new SidarTestPaint(), this);
     m_label->setText("madafaka");
     m_label->setMinimumSize(QSize(240,200));
 
-    tests[0] = new RadisTestPaint();
-    tests[1] = new RadisTestPaint1();
-    tests[2] = new RadisTestPaint2();
-    tests[3] = new RadisTestPaint3();
-    tests[4] = new RadisHTMLRender();
+    tests[0] = new SidarTestPaint();
+    tests[1] = new SidarTestPaint1();
+    tests[2] = new SidarTestPaint2();
+    tests[3] = new SidarTestPaint3();
+    tests[4] = new SidarHTMLRender();
 
     m_timer.setInterval(2000);
     connect(&m_timer, SIGNAL(timeout()),
@@ -41,13 +41,13 @@ void MainWindow::generateRandomPaint()
 {
 
     // demonstrates random setting of a  painting class with no deletion!
-    m_label->setRadisPainter(tests[qrand()%3], false);
+    m_label->setSidarPainter(tests[qrand()%3], false);
 }
 
 void MainWindow::showAllPaints()
 {
     static int ind = 0;
-    m_label->setRadisPainter(tests[ind%5]);
+    m_label->setSidarPainter(tests[ind%5]);
     ind++;
 }
 

@@ -1,11 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "radislabel.h"
+#include "sidarlabel.h"
 #include <QWidget>
 #include <QTimer>
 
-class RadisPaintInterface;
+class SidarPaintInterface;
 
 class MainWindow : public QWidget
 {
@@ -21,10 +21,10 @@ private slots:
 
     void handleSomeClicks(void);
 private:
-    RadisLabel* m_label;
+    SidarLabel* m_label;
     QTimer     m_timer;
     //
-    RadisPaintInterface* tests[5];
+    SidarPaintInterface* tests[5];
 };
 
 #endif // MAINWINDOW_H

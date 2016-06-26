@@ -8,19 +8,19 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = radis-label
+TARGET = Sidar-label
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    radislabel.cpp \
-    radispaintinterface.cpp \
-    radistestpaint.cpp
+    sidarlabel.cpp \
+    sidarpaintinterface.cpp \
+    sidartestpaint.cpp
 
 HEADERS  += mainwindow.h \
-    radislabel.h \
-    radispaintinterface.h \
-    radistestpaint.h
+    sidarlabel.h \
+    sidarpaintinterface.h \
+    sidartestpaint.h
 
 FORMS    += mainwindow.ui
