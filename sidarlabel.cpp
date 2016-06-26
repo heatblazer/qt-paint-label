@@ -93,6 +93,8 @@ void SidarLabel::resizeEvent(QResizeEvent *ev)
 void SidarLabel::handleMousePressed(const QWidget *caller)
 {
     (void)caller;
+    // we can add handler if we want to change something private on click
+    // like if we want to make our custom button
 }
 
 
