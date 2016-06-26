@@ -62,7 +62,7 @@ void RadisTestPaint1::radisPaint(const RadisLabel &pradis)
     QSize radis_size = pradis.size();
     QPainter pnt((QPaintDevice*)&pradis);
     pnt.setPen(penline);
-    QString s("MADAFAKAAA000110");
+    QString s("LINED");
     QFont fnt(pradis.font());
     QFontMetrics fm(fnt);
     int pixW = fm.width(s);
