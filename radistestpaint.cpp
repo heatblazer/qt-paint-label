@@ -1,7 +1,10 @@
 #include "radistestpaint.h"
 
-#include <radislabel.h>
+#include "radislabel.h"
+
+#include <QTextDocument>
 #include <QPainter>
+
 
 RadisTestPaint::RadisTestPaint()
 {
@@ -62,7 +65,7 @@ void RadisTestPaint1::radisPaint(const RadisLabel &pradis)
     QSize radis_size = pradis.size();
     QPainter pnt((QPaintDevice*)&pradis);
     pnt.setPen(penline);
-    QString s("LINED");
+    QString s("WRAPPED");
     QFont fnt(pradis.font());
     QFontMetrics fm(fnt);
     int pixW = fm.width(s);
@@ -101,7 +104,7 @@ void RadisTestPaint2::radisPaint(const RadisLabel &pradis)
 
     QPainter pnt((QPaintDevice*)&pradis);
     pnt.setPen(penline);
-    QString s("LINE 12312");
+    QString s("Custom draw");
     QFont fnt(pradis.font());
     QFontMetrics fm(fnt);
     int pixW = fm.width(s);
@@ -168,3 +171,25 @@ void RadisTestPaint3::radisPaint(const RadisLabel &pradis)
 
 
 
+
+RadisHTMLRender::RadisHTMLRender()
+{
+
+}
+
+RadisHTMLRender::~RadisHTMLRender()
+{
+
+}
+
+void RadisHTMLRender::radisPaint(const RadisLabel &pradis)
+{
+    QPainter pnt((QPaintDevice*)&pradis);
+
+    QTextDocument html;
+    html.setHtml(QString("<body>"
+                         "<h3 style='color:red;'> Hello HTML </h3>"
+                         "</body>"));
+
+    html.drawContents(&pnt);
+}

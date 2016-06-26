@@ -41,5 +41,13 @@ public:
 };
 
 
+class RadisHTMLRender : public RadisPaintInterface
+{
+public:
+    RadisHTMLRender();
+    virtual ~RadisHTMLRender();
+    void radisPaint(const RadisLabel &pradis);
+};
+
 #endif // RADISTESTPAINT
 
