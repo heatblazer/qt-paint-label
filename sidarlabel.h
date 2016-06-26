@@ -17,7 +17,7 @@ public:
     explicit SidarLabel(const QString& text="", QWidget* parent=0);
     virtual ~SidarLabel(); // we may derive better labesl
 
-    void setSidarPainter(SidarPaintInterface* paint, bool deleteme=false);
+    void setsidarPainter(SidarPaintInterface* paint, bool deleteme=false);
 
 signals:
     // for now leave the double click

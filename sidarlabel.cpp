@@ -25,7 +25,7 @@ SidarLabel::~SidarLabel()
 
 
 /** set a new Sidar paint interface, and delete or overwrite the old one
- * @brief SidarLabel::setSidarPainter
+ * @brief SidarLabel::setsidarPainter
  * @param paint
  * @param deleteme - if we need to delete the ref to the painting class
  * ex. when you call it that way:
@@ -35,7 +35,7 @@ SidarLabel::~SidarLabel()
  *  if you have instancies of the painter interfaces and you are using only an
  *  aggregation use it without a param or default (false)
  */
-void SidarLabel::setSidarPainter(SidarPaintInterface *paint, bool deleteme)
+void SidarLabel::setsidarPainter(SidarPaintInterface *paint, bool deleteme)
 {
 
     if (deleteme) {
@@ -78,7 +78,7 @@ void SidarLabel::mouseReleaseEvent(QMouseEvent *event)
 void SidarLabel::paintEvent(QPaintEvent *ev)
 {
     (void)ev;
-    p_paint->SidarPaint(*this);
+    p_paint->sidarPaint(*this);
     update();
 }
 
