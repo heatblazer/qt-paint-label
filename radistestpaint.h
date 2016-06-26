@@ -19,6 +19,7 @@ public:
     RadisTestPaint1();
     virtual ~RadisTestPaint1();
     void radisPaint(const RadisLabel &pradis);
+
 };
 
 

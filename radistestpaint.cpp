@@ -21,17 +21,23 @@ void RadisTestPaint::radisPaint(const RadisLabel &pradis)
 
     QPainter pnt((QPaintDevice*)&pradis);
     pnt.setPen(penline);
-    QString s("LINE 3");
+    QString s1("Left");
+    QString s2("Right");
     QFont fnt(pradis.font());
     QFontMetrics fm(fnt);
-    int pixW = fm.width(s);
-    int pixH = fm.height();
+    int pixW1 = fm.width(s1);
+    int pixH1 = fm.height();
+    int pixW2 = fm.width(s2);
+
     pnt.save();
-    pnt.drawLine(QLine(0, 160, 160, 160));
     pnt.setPen(pentext);
-    pnt.drawText(160, 165, s);
+    pnt.drawText(0, pixW1, s1);
     pnt.setPen(penline);
-    pnt.drawLine(QLine(160+pixW, 160, 320, 160));
+    /*pixW1+pradis.size().width()-pixW2,*/
+    pnt.drawLine(QLine(pixW1, pixW1,
+                       pradis.size().width()-pixW2, pixW1));
+    pnt.setPen(pentext);
+    pnt.drawText(pradis.size().width()-pixW2, pixW1, s2);
     pnt.restore();
 }
 
@@ -148,7 +154,6 @@ void RadisTestPaint3::radisPaint(const RadisLabel &pradis)
     pnt.drawLine(QLine(0, drawHeight, texBegin, drawHeight));
     pnt.drawLine(QLine(texBegin, drawHeight-pixH, texEnd, drawHeight-pixH));
     pnt.drawLine(QLine(texBegin, drawHeight+pixH, texEnd, drawHeight+pixH));
-
 
     pnt.setPen(pentext);
 
