@@ -7,7 +7,7 @@ SidarLabel::SidarLabel(SidarPaintInterface *paint, QWidget *parent)
     : QLabel(parent), p_paint(paint)
 {
     // this is experimental!
-    setStyleSheet("border:solid;border-width:2px;");
+    setStyleSheet("border:solid;border-width:1px;");
 
 }
 

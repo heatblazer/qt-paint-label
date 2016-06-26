@@ -48,10 +48,19 @@ MainWindow::MainWindow(QWidget *parent) :
  //   connect(&m_timer, SIGNAL(timeout()),
  //           this, SLOT(showAllPaints()));
  //   m_timer.start();
-    for(int i =0; i < 5; ++i) {
-        connect(m_labels[i], SIGNAL(mousePressed()),
-                this, SLOT(handleSomeClicks()));
-    }
+
+    connect(m_labels[0], SIGNAL(mousePressed()),
+            this, SLOT(handleSomeClicks()));
+    connect(m_labels[1], SIGNAL(mousePressed()),
+            this, SLOT(handleSomeClicks()));
+    connect(m_labels[2], SIGNAL(mousePressed()),
+            this, SLOT(handleSomeClicks()));
+    connect(m_labels[3], SIGNAL(mousePressed()),
+            this, SLOT(handleSomeClicks()));
+    connect(m_labels[4], SIGNAL(mousePressed()),
+            this, SLOT(handleSomeClicks()));
+
+
 
     this->setLayout(&m_layout);
 
