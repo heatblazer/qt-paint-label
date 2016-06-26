@@ -24,3 +24,5 @@ HEADERS  += mainwindow.h \
     sidartestpaint.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += assets/globe_64.png
