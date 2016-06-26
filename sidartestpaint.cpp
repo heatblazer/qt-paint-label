@@ -188,6 +188,8 @@ void SidarHTMLRender::SidarPaint(const SidarLabel &pSidar)
     QTextDocument html;
     html.setHtml(QString("<body>"
                          "<h3 style='color:red;'> Hello HTML </h3>"
+                         "<br/>"
+                         "<img src='/home/ilian/gitprojects/qt-paint-label/assets/globe_64.png' width='64' height='64'/>"
                          "</body>"));
 
     html.drawContents(&pnt);
