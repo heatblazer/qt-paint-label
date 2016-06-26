@@ -4,6 +4,7 @@
 #include <QTextDocument>
 #include <QPainter>
 
+#include <iostream>
 
 SidarTestPaint::SidarTestPaint()
 {
@@ -16,7 +17,7 @@ SidarTestPaint::~SidarTestPaint()
 
 }
 
-void SidarTestPaint::SidarPaint(const SidarLabel &pSidar)
+void SidarTestPaint::sidarPaint(const SidarLabel &pSidar)
 {
     QPen penline(QColor(255, 0, 0));
     QPen pentext(QColor(0, 0, 255));
@@ -56,7 +57,7 @@ SidarTestPaint1::~SidarTestPaint1()
 }
 
 // No hardcoding test!!!
-void SidarTestPaint1::SidarPaint(const SidarLabel &pSidar)
+void SidarTestPaint1::sidarPaint(const SidarLabel &pSidar)
 {
     QPen penline(QColor(70, 255, 0));
     QPen pentext(QColor(0, 167, 255));
@@ -96,7 +97,7 @@ SidarTestPaint2::~SidarTestPaint2()
 
 }
 
-void SidarTestPaint2::SidarPaint(const SidarLabel &pSidar)
+void SidarTestPaint2::sidarPaint(const SidarLabel &pSidar)
 {
     QPen penline(QColor(255, 0, 0));
     QPen pentext(QColor(255, 0, 255));
@@ -134,7 +135,7 @@ SidarTestPaint3::~SidarTestPaint3()
 }
 
 
-void SidarTestPaint3::SidarPaint(const SidarLabel &pSidar)
+void SidarTestPaint3::sidarPaint(const SidarLabel &pSidar)
 {
     QPen penline(QColor(70, 255, 0));
     QPen pentext(QColor(0, 167, 255));
@@ -181,7 +182,7 @@ SidarHTMLRender::~SidarHTMLRender()
 
 }
 
-void SidarHTMLRender::SidarPaint(const SidarLabel &pSidar)
+void SidarHTMLRender::sidarPaint(const SidarLabel &pSidar)
 {
     QPainter pnt((QPaintDevice*)&pSidar);
 
@@ -193,4 +194,64 @@ void SidarHTMLRender::SidarPaint(const SidarLabel &pSidar)
                          "</body>"));
 
     html.drawContents(&pnt);
+}
+
+
+// experimental animation
+SidarAnimation::SidarAnimation(QObject *parent) : QObject(parent),
+    onetime(false), label_h(0), label_w(0)
+{
+    // init animation
+    m_animation_object.text = "MOVTEX";
+    m_animation_object.tex_x = 0;
+    m_animation_object.tex_y = 0;
+
+    m_anim_tick.setInterval(300);
+    connect(&m_anim_tick, SIGNAL(timeout()),
+            this, SLOT(updateAnimation()));
+    m_anim_tick.start();
+}
+
+
+
+SidarAnimation::~SidarAnimation()
+{
+
+}
+
+void SidarAnimation::sidarPaint(const SidarLabel &pSidar)
+{
+    QPen pentext(QColor(255, 0, 0));
+    QPainter pnt((QPaintDevice*)&pSidar);
+
+    if (!onetime) {
+        onetime = true;
+        label_h = pSidar.size().height();
+        label_w = pSidar.size().width();
+        QFont fnt(pSidar.font());
+        QFontMetrics fm(fnt);
+        m_animation_object.tex_w = fm.width(m_animation_object.text);
+        m_animation_object.tex_h = fm.height();
+
+    }
+    pnt.save();
+
+    pnt.setPen(pentext);
+    pnt.drawText(m_animation_object.tex_x, m_animation_object.tex_w, m_animation_object.text);
+    pnt.restore();
+}
+
+void SidarAnimation::updateAnimation()
+{
+
+    std::cout << "Anim tick" << std::endl;
+    if (m_animation_object.tex_x+m_animation_object.tex_w >= label_w) {
+        m_animation_object.vel = -1;
+    }
+    if (m_animation_object.tex_x <= 0) {
+        m_animation_object.vel = 1;
+    }
+
+    m_animation_object.tex_x+=30 * m_animation_object.vel;
+
 }
