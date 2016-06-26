@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_labels[2]->setText("madafaka");
     m_labels[2]->setMinimumSize(QSize(240,200));
 
-    m_labels[3] = new SidarLabel(new SidarTestPaint2(), this);
+    m_labels[3] = new SidarLabel(new SidarAnimation(), this);
     m_labels[3]->setText("madafaka");
     m_labels[3]->setMinimumSize(QSize(240,200));
 
@@ -77,13 +77,13 @@ void MainWindow::generateRandomPaint()
 {
 
     // demonstrates random setting of a  painting class with no deletion!
-    //m_label->setSidarPainter(tests[qrand()%3], false);
+    //m_label->setsidarPainter(tests[qrand()%3], false);
 }
 
 void MainWindow::showAllPaints()
 {
     static int ind = 0;
-    //m_label->setSidarPainter(tests[ind%5]);
+    //m_label->setsidarPainter(tests[ind%5]);
     ind++;
 }
 
