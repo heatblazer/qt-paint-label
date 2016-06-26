@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Sidar-label
 TEMPLATE = app
 
+# from the prebuild combination
+SOURCES += globe_64.c
 
 SOURCES += main.cpp\
         mainwindow.cpp \
