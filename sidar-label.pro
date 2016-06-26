@@ -25,4 +25,4 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
-RESOURCES += assets/globe_64.png
+RESOURCES += assets/globe_64.jpg
