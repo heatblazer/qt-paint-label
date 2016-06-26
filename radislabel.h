@@ -39,6 +39,7 @@ protected:
     void paintEvent(QPaintEvent *ev);
 
     // this will handle the resizes if needed
+    // add an abstract function to the interface to handle the resize changes
     void resizeEvent(QResizeEvent *ev);
 
 private:

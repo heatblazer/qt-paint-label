@@ -85,6 +85,7 @@ void RadisLabel::paintEvent(QPaintEvent *ev)
 void RadisLabel::resizeEvent(QResizeEvent *ev)
 {
     (void)ev;
+    // call paint class spcific here
 }
 
 
