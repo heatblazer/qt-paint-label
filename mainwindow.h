@@ -3,6 +3,7 @@
 
 #include "sidarlabel.h"
 #include <QWidget>
+#include <QHBoxLayout>
 #include <QTimer>
 
 class SidarPaintInterface;
@@ -21,9 +22,10 @@ private slots:
 
     void handleSomeClicks(void);
 private:
-    SidarLabel* m_label;
+    SidarLabel* m_labels[5];
     QTimer     m_timer;
     //
+    QHBoxLayout m_layout;
     SidarPaintInterface* tests[5];
 };
 
