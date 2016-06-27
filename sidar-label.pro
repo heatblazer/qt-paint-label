@@ -15,12 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     sidarlabel.cpp \
-    SidarPaintInterface.cpp \
+    sidarpaintinterface.cpp \
     sidartestpaint.cpp
 
 HEADERS  += mainwindow.h \
     sidarlabel.h \
-    SidarPaintInterface.h \
+    sidarpaintinterface.h \
     sidartestpaint.h
 
 FORMS    += mainwindow.ui
