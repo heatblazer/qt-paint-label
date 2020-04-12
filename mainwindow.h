@@ -22,7 +22,7 @@ private slots:
 
     void handleSomeClicks(void);
 private:
-    SidarLabel* m_labels[5];
+    SidarLabel* m_labels[6];
     QTimer     m_timer;
     //
     QHBoxLayout m_layout;

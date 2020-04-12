@@ -30,6 +30,11 @@ MainWindow::MainWindow(QWidget *parent) :
     m_labels[4]->setText("madafaka");
     m_labels[4]->setMinimumSize(QSize(240,200));
 
+    m_labels[5] = new SidarLabel(new SidarTestPaintQuad(), this);
+    m_labels[5]->setText("quadtree");
+    m_labels[5]->setMinimumSize(QSize(240,200));
+
+
 #if 0
     tests[0] = new SidarTestPaint();
     tests[1] = new SidarTestPaint1();
@@ -37,11 +42,14 @@ MainWindow::MainWindow(QWidget *parent) :
     tests[3] = new SidarTestPaint3();
     tests[4] = new SidarHTMLRender();
 #endif
+
     m_layout.addWidget(m_labels[0]);
     m_layout.addWidget(m_labels[1]);
     m_layout.addWidget(m_labels[2]);
     m_layout.addWidget(m_labels[3]);
     m_layout.addWidget(m_labels[4]);
+    m_layout.addWidget(m_labels[5]);
+
     m_layout.setAlignment(this, Qt::AlignCenter);
 
  //   m_timer.setInterval(2000);

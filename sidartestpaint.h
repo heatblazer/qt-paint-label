@@ -2,7 +2,7 @@
 #define SidarTESTPAINT
 
 #include "sidarpaintinterface.h"
-
+#include "quadtree.h"
 #include <QTimer>
 #include <QObject>
 
@@ -42,6 +42,18 @@ public:
     void sidarPaint(const SidarLabel &pSidar);
 };
 
+
+class SidarTestPaintQuad : public SidarPaintInterface
+{
+    FIZ<int>::QuadTree quatt;
+    QList<QRect> m_points;
+
+    void preparePoints(FIZ<int>::QuadTree* root);
+public:
+    SidarTestPaintQuad();
+    virtual ~SidarTestPaintQuad();
+    void sidarPaint(const SidarLabel &pSidar);
+};
 
 class SidarHTMLRender : public SidarPaintInterface
 {

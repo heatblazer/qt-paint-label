@@ -255,3 +255,53 @@ void SidarAnimation::updateAnimation()
     m_animation_object.tex_x+=30 * m_animation_object.vel;
 
 }
+
+void SidarTestPaintQuad::preparePoints(FIZ<int>::QuadTree *root)
+{
+    if (!root) return;
+    QRect r(QPoint(root->dim.topLeft.x, root->dim.topLeft.y),
+            QPoint(root->dim.bottomRight.x, root->dim.bottomRight.y));
+    m_points.append(r);
+
+    preparePoints(root->topLeft);
+    preparePoints(root->topRight);
+    preparePoints(root->bottomLeft);
+    preparePoints(root->bottomRight);
+}
+
+SidarTestPaintQuad::SidarTestPaintQuad() :
+    quatt(FIZ<int>::Dimension(
+              FIZ<int>::Point(0,0), FIZ<int>::Point(100,100)))
+{
+    quatt.insert(FIZ<int>::Point(10,10));
+    quatt.insert(FIZ<int>::Point(40,40));
+    quatt.insert(FIZ<int>::Point(30,70));
+    quatt.insert(FIZ<int>::Point(20,70));
+
+}
+
+SidarTestPaintQuad::~SidarTestPaintQuad()
+{
+
+}
+
+void SidarTestPaintQuad::sidarPaint(const SidarLabel &pSidar)
+{
+    this->preparePoints(&quatt);
+    QPen penline(QColor(255, 0, 0));
+    QPen pentext(QColor(0, 0, 255));
+
+    QPainter pnt((QPaintDevice*)&pSidar);
+    pnt.setPen(penline);
+    QString s("QuadTree");
+    QFont fnt(pSidar.font());
+    QFontMetrics fm(fnt);
+    int pixW = fm.width(s);
+    int pixH = fm.height();
+    pnt.save();
+    QBrush br(QColor(255, 255, 0));
+    for(auto rect : m_points) {
+        pnt.drawRect(rect);
+    }
+    pnt.restore();
+}

@@ -19,6 +19,7 @@ SOURCES += main.cpp\
     sidartestpaint.cpp
 
 HEADERS  += mainwindow.h \
+    quadtree.h \
     sidarlabel.h \
     SidarPaintInterface.h \
     sidartestpaint.h
