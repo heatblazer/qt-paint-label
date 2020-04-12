@@ -1,6 +1,6 @@
 #include "sidartestpaint.h"
 #include "sidarlabel.h"
-
+#include <math.h>
 #include <QTextDocument>
 #include <QPainter>
 
@@ -190,7 +190,7 @@ void SidarHTMLRender::sidarPaint(const SidarLabel &pSidar)
     html.setHtml(QString("<body>"
                          "<h3 style='color:red;'> Hello HTML </h3>"
                          "<br/>"
-                         "<img src='/home/ilian/projects/qt-paint-label/assets/globe_64.jpg' width='64' height='64'/>"
+                         "<img src='/home/ilian/gitprojects/qt-paint-label/assets/globe_64.jpg' width='64' height='64'/>"
                          "</body>"));
 
     html.drawContents(&pnt);
@@ -244,7 +244,6 @@ void SidarAnimation::sidarPaint(const SidarLabel &pSidar)
 void SidarAnimation::updateAnimation()
 {
 
-    std::cout << "Anim tick" << std::endl;
     if (m_animation_object.tex_x+m_animation_object.tex_w >= label_w) {
         m_animation_object.vel = -1;
     }
@@ -256,38 +255,67 @@ void SidarAnimation::updateAnimation()
 
 }
 
+void SidarTestPaintQuad::clearTree(FIZ<int>::QuadTree *root)
+{
+    if (!root) return;
+    clearTree(root->topLeft);
+    clearTree(root->topRight);
+    clearTree(root->bottomLeft);
+    clearTree(root->bottomRight);
+    delete  root;
+}
+
 void SidarTestPaintQuad::preparePoints(FIZ<int>::QuadTree *root)
 {
     if (!root) return;
     QRect r(QPoint(root->dim.topLeft.x, root->dim.topLeft.y),
             QPoint(root->dim.bottomRight.x, root->dim.bottomRight.y));
+
     m_points.append(r);
 
     preparePoints(root->topLeft);
     preparePoints(root->topRight);
     preparePoints(root->bottomLeft);
     preparePoints(root->bottomRight);
+
 }
 
-SidarTestPaintQuad::SidarTestPaintQuad() :
-    quatt(FIZ<int>::Dimension(
-              FIZ<int>::Point(0,0), FIZ<int>::Point(100,100)))
-{
+SidarTestPaintQuad::SidarTestPaintQuad() : quatt{0x00}
+    {
+        quatt = new FIZ<int>::QuadTree(FIZ<int>::Dimension(
+            FIZ<int>::Point(0,0), FIZ<int>::Point(240,200)));
+
+#if 0
     quatt.insert(FIZ<int>::Point(10,10));
     quatt.insert(FIZ<int>::Point(40,40));
     quatt.insert(FIZ<int>::Point(30,70));
-    quatt.insert(FIZ<int>::Point(20,70));
+    quatt.insert(FIZ<int>::Point(60,70));
+    quatt.insert(FIZ<int>::Point(70,70));
+
+    quatt.insert(FIZ<int>::Point(120,110));
+    quatt.insert(FIZ<int>::Point(170,40));
+    quatt.insert(FIZ<int>::Point(170,40));
+    quatt.insert(FIZ<int>::Point(150,160));
+    quatt.insert(FIZ<int>::Point(170,140));
+#else
+        for(int i=0; i < 240; i++) {
+            for (int j=0; j < 200; j++) {
+                quatt->insert(FIZ<int>::Point(i, j));
+            }
+    }
+
+#endif
 
 }
 
 SidarTestPaintQuad::~SidarTestPaintQuad()
 {
-
+    clearTree(quatt);
 }
 
 void SidarTestPaintQuad::sidarPaint(const SidarLabel &pSidar)
 {
-    this->preparePoints(&quatt);
+    this->preparePoints(quatt);
     QPen penline(QColor(255, 0, 0));
     QPen pentext(QColor(0, 0, 255));
 

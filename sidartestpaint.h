@@ -45,9 +45,9 @@ public:
 
 class SidarTestPaintQuad : public SidarPaintInterface
 {
-    FIZ<int>::QuadTree quatt;
+    FIZ<int>::QuadTree* quatt;
     QList<QRect> m_points;
-
+    void clearTree(FIZ<int>::QuadTree* root) ;
     void preparePoints(FIZ<int>::QuadTree* root);
 public:
     SidarTestPaintQuad();
