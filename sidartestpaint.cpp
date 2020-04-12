@@ -283,26 +283,25 @@ void SidarTestPaintQuad::preparePoints(FIZ<int>::QuadTree *root)
 SidarTestPaintQuad::SidarTestPaintQuad() : quatt{0x00}
     {
         quatt = new FIZ<int>::QuadTree(FIZ<int>::Dimension(
-            FIZ<int>::Point(0,0), FIZ<int>::Point(240,200)));
+            FIZ<int>::Point(0,0), FIZ<int>::Point(200, 200)));
 
 #if 0
-    quatt.insert(FIZ<int>::Point(10,10));
-    quatt.insert(FIZ<int>::Point(40,40));
-    quatt.insert(FIZ<int>::Point(30,70));
-    quatt.insert(FIZ<int>::Point(60,70));
-    quatt.insert(FIZ<int>::Point(70,70));
+        quatt->insert(FIZ<int>::Point(10,10));
+        quatt->insert(FIZ<int>::Point(60,200));
+        quatt->insert(FIZ<int>::Point(40,150));
+        quatt->insert(FIZ<int>::Point(10,110));
+        quatt->insert(FIZ<int>::Point(110,210));
+        quatt->insert(FIZ<int>::Point(70,90));
 
-    quatt.insert(FIZ<int>::Point(120,110));
-    quatt.insert(FIZ<int>::Point(170,40));
-    quatt.insert(FIZ<int>::Point(170,40));
-    quatt.insert(FIZ<int>::Point(150,160));
-    quatt.insert(FIZ<int>::Point(170,140));
 #else
-        for(int i=0; i < 240; i++) {
-            for (int j=0; j < 200; j++) {
-                quatt->insert(FIZ<int>::Point(i, j));
-            }
-    }
+        for(int i=0; i < 200; ++i) {
+            quatt->insert(FIZ<int>::Point(i,0));
+            quatt->insert(FIZ<int>::Point(0,i));
+            quatt->insert(FIZ<int>::Point(i,i));
+
+
+        }
+
 
 #endif
 

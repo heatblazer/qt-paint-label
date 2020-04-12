@@ -2,6 +2,7 @@
 #define QUADTREE_H
 
 #include <iostream>
+#include <map>
 template  <class T> struct FIZ {
 enum Directions
 {
@@ -19,15 +20,6 @@ struct Point
     Point() : x{0}, y{0}, quadrant{Nowhere} {}
     Point(int x_, int y_) : x{x_}, y{y_},  quadrant{Nowhere}
     {
-        if (x <= 240/2 && y <= 200/2) {
-            quadrant = TopLeft;
-        } else if (x <= 240/2 && y >= 200/2) {
-            quadrant = BottomLeft;
-        } else if (x >= 240/2 && y <= 200/2 ) {
-            quadrant = TopRight;
-        } else if (x >= 240/2 && y >= 200/2) {
-            quadrant = BottomRight;
-        }
     };
 
     std::string toString() {
@@ -77,21 +69,30 @@ struct QuadTree
                p1.y <= dim.bottomRight.y;
     }
 
-    void insert(const Point& p1)
+    void insert(Point p1)
     {
-        if (p1.quadrant == Nowhere)
-            return;
+        if (p1.x < 0 || p1.y < 0) return;
 
         if (::abs(dim.topLeft.x-dim.bottomRight.x) <= 1 &&
-            ::abs(dim.bottomRight.y-dim.bottomRight.y) <= 1 ) {
+            ::abs(dim.topLeft.y-dim.bottomRight.y) <= 1 )
             return;
-        }
-        if (!inBoundary(p1)) {
-            std::cout << "###### Out of bounds\r\n";
-                        return;
-        }
 
-        Directions d = p1.quadrant;
+        if (!inBoundary(p1))
+            return;
+
+        int centrex = (int)(dim.topLeft.x + dim.bottomRight.x) /2;
+        int centrey = (int)(dim.topLeft.y + dim.bottomRight.y) /2 ;
+
+        Directions d = Nowhere;
+        if (p1.x <=  centrex && p1.y <= centrey )
+            p1.quadrant = d = TopLeft;
+        else if (p1.x >= centrex && p1.y >= centrey)
+            p1.quadrant = d = BottomRight;
+        else if (p1.x >= centrex && p1.y <= centrey)
+            p1.quadrant = d = TopRight;
+        else if (p1.x <= centrex && p1.y >= centrey)
+            p1.quadrant = d =  BottomLeft;
+
         switch (d) {
         case TopLeft:
             if (!topLeft) {
@@ -123,18 +124,18 @@ struct QuadTree
         case BottomRight:
             if (!bottomRight) {
                 bottomRight = new QuadTree(
-                Dimension(Point((dim.topLeft.x + dim.bottomRight.x)/2,
+                    Dimension(Point((dim.topLeft.x + dim.bottomRight.x)/2,
                                     (dim.topLeft.y + dim.bottomRight.y)/2),
                               Point(dim.bottomRight.x, dim.bottomRight.y)));
                 bottomRight->insert(p1);
             }
             break;
         case Nowhere:
-             break;
         default:
             break;
         }
     }
-    };
+};
+
 };
 #endif // QUADTREE_H

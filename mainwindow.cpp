@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_labels[5] = new SidarLabel(new SidarTestPaintQuad(), this);
     m_labels[5]->setText("quadtree");
-    m_labels[5]->setMinimumSize(QSize(240,200));
+    m_labels[5]->setMinimumSize(QSize(230,199));
 
 
 #if 0
