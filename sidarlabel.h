@@ -13,8 +13,11 @@ class SidarLabel : public QLabel
     Q_OBJECT
 public:
     explicit SidarLabel(QWidget* parent=0);
+
     explicit SidarLabel(SidarPaintInterface* paint, QWidget* parent=0);
+
     explicit SidarLabel(const QString& text="", QWidget* parent=0);
+
     virtual ~SidarLabel(); // we may derive better labesl
 
     void setsidarPainter(SidarPaintInterface* paint, bool deleteme=false);
@@ -33,6 +36,7 @@ protected:
     // don`t remiplement mouse 2x click
     //void mouseDoubleClickEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
+
     void mouseReleaseEvent(QMouseEvent* event);
 
     // this is the method to override
