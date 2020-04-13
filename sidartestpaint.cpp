@@ -255,39 +255,32 @@ void SidarAnimation::updateAnimation()
 
 }
 
-void SidarTestPaintQuad::clearTree(FIZ<int>::QuadTree *root)
+void SidarTestPaintQuad::clearTree(FIZ<int>::QuadTree **root)
 {
-    if (!root) return;
-    clearTree(root->topLeft);
-    clearTree(root->topRight);
-    clearTree(root->bottomLeft);
-    clearTree(root->bottomRight);
-    delete  root;
+    if (!*root)
+        return;
+    clearTree(&(*root)->topLeft);
+    clearTree(&(*root)->topRight);
+    clearTree(&(*root)->bottomLeft);
+    clearTree(&(*root)->bottomRight);
+    delete  *root;
+    *root = nullptr;
 }
 
 void SidarTestPaintQuad::preparePoints(FIZ<int>::QuadTree *root)
 {
     if (!root) return;
-    QRect r(QPoint(root->dim.topLeft.x, root->dim.topLeft.y),
-            QPoint(root->dim.bottomRight.x, root->dim.bottomRight.y));
-
-    m_points.append(r);
 
     preparePoints(root->topLeft);
     preparePoints(root->topRight);
     preparePoints(root->bottomLeft);
     preparePoints(root->bottomRight);
 
-}
+    QRect r(QPoint(root->dim.topLeft.x, root->dim.topLeft.y),
+            QPoint(root->dim.bottomRight.x, root->dim.bottomRight.y));
 
-void SidarTestPaintQuad::clearAll(FIZ<int>::QuadTree *root)
-{
-    if (!root) return;
-    clearAll(root->topLeft);
-    clearAll(root->topRight);
-    clearAll(root->bottomLeft);
-    clearAll(root->bottomRight);
-    delete root;
+    m_points.append(r);
+
 }
 
 SidarTestPaintQuad::SidarTestPaintQuad() : quatt{0x00}
@@ -295,23 +288,17 @@ SidarTestPaintQuad::SidarTestPaintQuad() : quatt{0x00}
         quatt = new FIZ<int>::QuadTree(FIZ<int>::Dimension(
             FIZ<int>::Point(0,0), FIZ<int>::Point(200, 200)));
 
-#if 1
         for(int i=0; i < 200; ++i) {
-            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(i, 0)));
-            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(0, i)));
-            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(i, i)));
+            quatt->insert(FIZ<int>::Point(i, 0));
+            quatt->insert(FIZ<int>::Point(0, i));
+            quatt->insert(FIZ<int>::Point(i, i));
         }
-#else
-        quatt->insert(FIZ<int>::Point(100,0));
-        quatt->insert(FIZ<int>::Point(0,0));
-#endif
         this->preparePoints(quatt);
-
 }
 
 SidarTestPaintQuad::~SidarTestPaintQuad()
 {
-    clearTree(quatt);
+    clearTree(&quatt);
 }
 
 void SidarTestPaintQuad::sidarPaint(const SidarLabel &pSidar)
