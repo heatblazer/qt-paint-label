@@ -297,9 +297,9 @@ SidarTestPaintQuad::SidarTestPaintQuad() : quatt{0x00}
 
 #if 1
         for(int i=0; i < 200; ++i) {
-            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(0, 100)));
-            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(0, 0)));
-            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(150, 100)));
+            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(i, 0)));
+            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(0, i)));
+            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(i, i)));
         }
 #else
         quatt->insert(FIZ<int>::Point(100,0));
