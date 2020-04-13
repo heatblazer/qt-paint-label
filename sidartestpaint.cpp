@@ -295,12 +295,16 @@ SidarTestPaintQuad::SidarTestPaintQuad() : quatt{0x00}
         quatt = new FIZ<int>::QuadTree(FIZ<int>::Dimension(
             FIZ<int>::Point(0,0), FIZ<int>::Point(200, 200)));
 
+#if 1
         for(int i=0; i < 200; ++i) {
-            quatt->insert(FIZ<int>::Point(i,0));
-            quatt->insert(FIZ<int>::Point(0,i));
-            quatt->insert(FIZ<int>::Point(i,i));
+            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(0, 100)));
+            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(0, 0)));
+            quatt->insert(new FIZ<int>::Node(10,FIZ<int>::Point(150, 100)));
         }
-
+#else
+        quatt->insert(FIZ<int>::Point(100,0));
+        quatt->insert(FIZ<int>::Point(0,0));
+#endif
         this->preparePoints(quatt);
 
 }
@@ -317,11 +321,8 @@ void SidarTestPaintQuad::sidarPaint(const SidarLabel &pSidar)
 
     QPainter pnt((QPaintDevice*)&pSidar);
     pnt.setPen(penline);
-    QString s("QuadTree");
     QFont fnt(pSidar.font());
     QFontMetrics fm(fnt);
-    int pixW = fm.width(s);
-    int pixH = fm.height();
     pnt.save();
     QBrush br(QColor(255, 255, 0));
     for(auto rect : m_points) {
