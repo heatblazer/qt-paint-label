@@ -49,6 +49,7 @@ class SidarTestPaintQuad : public SidarPaintInterface
     QList<QRect> m_points;
     void clearTree(FIZ<int>::QuadTree* root) ;
     void preparePoints(FIZ<int>::QuadTree* root);
+    void clearAll(FIZ<int>::QuadTree* root);
 public:
     SidarTestPaintQuad();
     virtual ~SidarTestPaintQuad();

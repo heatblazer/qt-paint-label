@@ -35,14 +35,6 @@ MainWindow::MainWindow(QWidget *parent) :
     m_labels[5]->setMinimumSize(QSize(230,199));
 
 
-#if 0
-    tests[0] = new SidarTestPaint();
-    tests[1] = new SidarTestPaint1();
-    tests[2] = new SidarTestPaint2();
-    tests[3] = new SidarTestPaint3();
-    tests[4] = new SidarHTMLRender();
-#endif
-
     m_layout.addWidget(m_labels[0]);
     m_layout.addWidget(m_labels[1]);
     m_layout.addWidget(m_labels[2]);

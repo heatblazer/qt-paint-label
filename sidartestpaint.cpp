@@ -280,30 +280,28 @@ void SidarTestPaintQuad::preparePoints(FIZ<int>::QuadTree *root)
 
 }
 
+void SidarTestPaintQuad::clearAll(FIZ<int>::QuadTree *root)
+{
+    if (!root) return;
+    clearAll(root->topLeft);
+    clearAll(root->topRight);
+    clearAll(root->bottomLeft);
+    clearAll(root->bottomRight);
+    delete root;
+}
+
 SidarTestPaintQuad::SidarTestPaintQuad() : quatt{0x00}
     {
         quatt = new FIZ<int>::QuadTree(FIZ<int>::Dimension(
             FIZ<int>::Point(0,0), FIZ<int>::Point(200, 200)));
 
-#if 0
-        quatt->insert(FIZ<int>::Point(10,10));
-        quatt->insert(FIZ<int>::Point(60,200));
-        quatt->insert(FIZ<int>::Point(40,150));
-        quatt->insert(FIZ<int>::Point(10,110));
-        quatt->insert(FIZ<int>::Point(110,210));
-        quatt->insert(FIZ<int>::Point(70,90));
-
-#else
         for(int i=0; i < 200; ++i) {
             quatt->insert(FIZ<int>::Point(i,0));
             quatt->insert(FIZ<int>::Point(0,i));
             quatt->insert(FIZ<int>::Point(i,i));
-
-
         }
 
-
-#endif
+        this->preparePoints(quatt);
 
 }
 
@@ -314,7 +312,6 @@ SidarTestPaintQuad::~SidarTestPaintQuad()
 
 void SidarTestPaintQuad::sidarPaint(const SidarLabel &pSidar)
 {
-    this->preparePoints(quatt);
     QPen penline(QColor(255, 0, 0));
     QPen pentext(QColor(0, 0, 255));
 
